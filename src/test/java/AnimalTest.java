@@ -2,10 +2,10 @@ import com.example.Animal;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+
 
 @RunWith(Parameterized.class)
 public class AnimalTest {
@@ -27,20 +27,30 @@ public class AnimalTest {
     }
 
     @Test
-    public void getAnimalTest() throws Exception {
+    public void getAnimalTest_1() {
+        Animal animal = new Animal();
+        String actStr = animal.getFamily();
+        assertEquals(
+                "Существует несколько семейств: заячьи, беличьи, мышиные, кошачьи, псовые, медвежьи, куньи",
+                actStr);
+    }
+
+    @Test
+    public void getAnimalTest_2() throws Exception {
+        Animal animal = new Animal();
+        List<String> actList = animal.getFood(animalKind);
+        assertEquals(list, actList);
+    }
+
+    @Test
+    public void getAnimalTest_3() throws Exception {
         try {
             Animal animal = new Animal();
-            assertEquals(list, animal.getFood(animalKind));
             animal.getFood("Млекопитающее");
-            assertEquals(
-                    "Существует несколько семейств: заячьи, беличьи, мышиные, кошачьи, псовые, медвежьи, куньи",
-                    animal.getFamily());
         } catch (Exception e) {
-            assertEquals(
-                    "Неизвестный вид животного, используйте значение Травоядное или Хищник",
-                    e.getMessage());
+            assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", e.getMessage());
         }
-
     }
+
 
 }
